@@ -101,8 +101,9 @@ function drawGraph(
   for (let i = 0; i < CO2Emissions.length; i++) {
     const currentPoint = {
       x:
-        canvasHTML.width / 10 +
-        ((canvasHTML.width - canvasHTML.width / 10) / CO2Emissions.length) *
+        (canvasHTML.width - 10) / 10 +
+        ((canvasHTML.width - 10 - (canvasHTML.width - 10) / 10) /
+          CO2Emissions.length) *
           (i + 1),
       y:
         canvasHTML.height -
@@ -111,9 +112,15 @@ function drawGraph(
           maxAverageCO2Emission(CO2Emissions)) *
           CO2Emissions[i].averageCO2EmissionRate,
     };
-    point(ctx, currentPoint.x, currentPoint.y);
+    point(ctx, currentPoint.x, currentPoint.y + 10);
     if (!!lastPoint)
-      line(ctx, lastPoint.x, lastPoint.y, currentPoint.x, currentPoint.y);
+      line(
+        ctx,
+        lastPoint.x,
+        lastPoint.y + 10,
+        currentPoint.x,
+        currentPoint.y + 10
+      );
     lastPoint = currentPoint;
   }
 }
